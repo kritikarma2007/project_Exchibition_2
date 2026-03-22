@@ -1,0 +1,5 @@
+{
+  "name": "VivaAI: Multilingual Socratic Agent",
+  "description": "An AI-driven multilingual viva agent for teachers to configure exams and students to take interactive voice-based vivas with real-time grading and analytics.",
+  "requestFramePermissions": ["microphone"]
+}
