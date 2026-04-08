@@ -1,0 +1,67 @@
+{
+  "users": [
+    {
+      "id": "973fcdbe-364d-48f2-b032-bd01d204cdfe",
+      "name": "Bharti pal",
+      "email": "bhartipal95859@gmail.com",
+      "passwordHash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+      "role": "student",
+      "roleId": "1001",
+      "createdAt": 1774288463964
+    },
+    {
+      "id": "bb2c8f8d-fa0a-4337-8571-810190bef4f7",
+      "name": "Ravi Pal",
+      "email": "rp077216@gmail.com",
+      "passwordHash": "834f7c65bd3fce789ade8de478f570f1370583f5eaee9c62ef57cdbdae94a610",
+      "role": "teacher",
+      "roleId": "1001",
+      "createdAt": 1774288534681
+    }
+  ],
+  "classrooms": [
+    {
+      "id": "0d8eca1d-621d-4b00-89c4-ddb662875ceb",
+      "name": "Operating Systems",
+      "subject": "Operating Systems",
+      "teacherId": "bb2c8f8d-fa0a-4337-8571-810190bef4f7",
+      "teacherName": "Ravi Pal",
+      "createdAt": 1774379337658
+    }
+  ],
+  "enrollments": [
+    {
+      "classroomId": "0d8eca1d-621d-4b00-89c4-ddb662875ceb",
+      "studentId": "973fcdbe-364d-48f2-b032-bd01d204cdfe",
+      "studentName": "Bharti pal",
+      "studentEmail": "bhartipal95859@gmail.com",
+      "joinedAt": 1774379392317
+    }
+  ],
+  "messages": [
+    {
+      "id": "d01f63ea-27ca-4e12-83c8-6a85b60bc3a4",
+      "classroomId": "0d8eca1d-621d-4b00-89c4-ddb662875ceb",
+      "text": "this is the operating systems test code",
+      "examCode": "816DBE",
+      "createdAt": 1774379641273
+    }
+  ],
+  "exams": [
+    {
+      "id": "e926d878-fe1b-48cb-ba98-345907dc8558",
+      "examCode": "816DBE",
+      "subject": "OS",
+      "questionCount": 5,
+      "difficulty": "Hard",
+      "syllabusText": "Os",
+      "timeLimit": 10,
+      "customQuestions": [],
+      "teacherId": "bb2c8f8d-fa0a-4337-8571-810190bef4f7",
+      "classroomId": "0d8eca1d-621d-4b00-89c4-ddb662875ceb",
+      "classroomName": "Operating Systems",
+      "createdAt": 1774379429142
+    }
+  ],
+  "vivaResponses": []
+}

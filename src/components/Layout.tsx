@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { BookOpen, BarChart2, Settings, LogOut, User, GraduationCap } from 'lucide-react';
+import { BookOpen, LogOut, GraduationCap } from 'lucide-react';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -10,80 +10,65 @@ interface LayoutProps {
   setRole: (role: 'teacher' | 'student' | null) => void;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children, activeTab, setActiveTab, role, setRole }) => {
+export const Layout: React.FC<LayoutProps> = ({ children, role, setRole }) => {
+  const isTeacher = role === 'teacher';
+  const isStudent = role === 'student';
+  
   return (
-    <div className="min-h-screen bg-[#F5F5F0] text-[#141414] font-sans">
-      {/* Top Black Bar */}
-      <div className="bg-[#141414] h-10 w-full flex items-center justify-end px-6">
-        <span className="text-white/60 text-[10px] font-bold uppercase tracking-widest">Viva/</span>
-      </div>
+    <div className="min-h-screen relative font-sans overflow-hidden text-white bg-[linear-gradient(135deg,#0f0c29,#302b63,#24243e)]">
+      {/* Background glow orbs - using exact dark theme styles */}
+      <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-[rgba(124,58,237,0.1)] blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-[rgba(79,70,229,0.1)] blur-[100px] rounded-full pointer-events-none" />
 
-      {/* Navigation */}
-      <nav className="bg-white border-b border-[#141414]/10 px-4 md:px-6 py-4 flex justify-between items-center sticky top-0 z-50">
-        <div className="flex items-center gap-3 cursor-pointer" onClick={() => setRole(null)}>
-          <div className="w-10 h-10 bg-[#141414] rounded-xl flex items-center justify-center text-white shrink-0 shadow-lg">
-            <BookOpen size={22} />
-          </div>
-          <h1 className="text-lg md:text-xl font-bold tracking-tight leading-tight">
-            AI Speech Based Viva System
-          </h1>
-        </div>
-        
-        <div className="flex gap-2 md:gap-4">
-          {role === 'teacher' && (
-            <>
-              <button 
-                onClick={() => setActiveTab('teacher')}
-                className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-xl transition-all ${activeTab === 'teacher' ? 'bg-[#141414] text-white' : 'hover:bg-[#141414]/5'}`}
-              >
-                <Settings size={18} />
-                <span className="text-sm font-medium hidden sm:inline">Configure</span>
-              </button>
-              <button 
-                onClick={() => setActiveTab('analytics')}
-                className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-xl transition-all ${activeTab === 'analytics' ? 'bg-[#141414] text-white' : 'hover:bg-[#141414]/5'}`}
-              >
-                <BarChart2 size={18} />
-                <span className="text-sm font-medium hidden sm:inline">Analytics</span>
-              </button>
-            </>
-          )}
-          {role === 'student' && (
-            <button 
-              onClick={() => setActiveTab('student')}
-              className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-xl transition-all ${activeTab === 'student' ? 'bg-[#141414] text-white' : 'hover:bg-[#141414]/5'}`}
-            >
-              <GraduationCap size={18} />
-              <span className="text-sm font-medium hidden sm:inline">My Exams</span>
-            </button>
-          )}
-        </div>
-
-        {role && (
-          <div className="flex items-center gap-2 md:gap-4">
-            <div className="hidden xs:flex items-center gap-2 px-3 py-1 bg-[#141414]/5 rounded-full">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#141414]/40">{role}</span>
+      {/* Main Content Wrapper */}
+      <div className="relative z-10 min-h-screen flex flex-col">
+        {/* Navigation */}
+        <nav className="h-[64px] bg-[rgba(255,255,255,0.04)] border-b border-[rgba(255,255,255,0.08)] px-4 md:px-8 flex justify-between items-center sticky top-0 z-50 shrink-0 backdrop-blur-md">
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => setRole(null)}>
+            <div className="w-10 h-10 bg-[linear-gradient(135deg,#7c3aed,#4f46e5)] rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-500/20">
+              {isStudent ? (
+                <GraduationCap size={22} />
+              ) : (
+                <BookOpen size={22} />
+              )}
             </div>
-            <button 
-              onClick={() => setRole(null)}
-              className="w-10 h-10 flex items-center justify-center text-[#141414]/60 hover:text-red-600 transition-colors hover:bg-red-50 rounded-xl"
-            >
-              <LogOut size={18} />
-            </button>
+            <div>
+              <h1 className="text-lg font-black tracking-tight leading-tight text-white mt-0.5">
+                SmartViva
+              </h1>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-[rgba(255,255,255,0.5)] mt-0.5">
+                {role === 'teacher' ? 'TEACHER PORTAL' : role === 'student' ? 'STUDENT PORTAL' : ''}
+              </p>
+            </div>
           </div>
-        )}
-      </nav>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto p-4 md:p-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-        >
-          {children}
-        </motion.div>
-      </main>
+          {role && (
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-[rgba(255,255,255,0.08)] rounded-[20px]">
+                <span className="text-[11px] font-bold uppercase tracking-widest text-white">{role} User</span>
+              </div>
+              <button
+                onClick={() => setRole(null)}
+                className="flex items-center gap-1.5 w-9 h-9 justify-center text-[rgba(255,255,255,0.5)] hover:text-[#fca5a5] hover:bg-[rgba(239,68,68,0.1)] transition-colors rounded-xl font-bold text-[11px]"
+                title="Logout"
+              >
+                <LogOut size={16} />
+              </button>
+            </div>
+          )}
+        </nav>
+
+        {/* Main Content */}
+        <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-8">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35 }}
+          >
+            {children}
+          </motion.div>
+        </main>
+      </div>
     </div>
   );
 };
